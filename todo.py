@@ -27,9 +27,9 @@ def todo_list():
 	if os.path.isfile('todo.txt'):
 		with open('todo.txt', 'r') as file1:
 			ls=file1.readlines()
-			ls=[i.strip() for i in ls]
-			for i in range(len(ls),0,-1):
-				sys.stdout.write('[{}] {}\n'.format(i,ls[i-1]))
+		ls=[i.strip() for i in ls]
+		for i in range(len(ls),0,-1):
+			sys.stdout.write('[{}] {}\n'.format(i,ls[i-1]))
 	else:
 		sys.stdout.write("There are no pending todos!\n")
 
@@ -37,17 +37,17 @@ def todo_del(num):
 	if os.path.isfile('todo.txt'):
 		with open('todo.txt', 'r') as file1:
 			ls=file1.readlines()
-			ls=[i.strip() for i in ls]
+		ls=[i.strip() for i in ls]
 			
-			if num<=0 or num>len(ls):
-				sys.stdout.write("Error: todo #{} does not exist. Nothing deleted.\n".format(num))
+		if num<=0 or num>len(ls):
+			sys.stdout.write("Error: todo #{} does not exist. Nothing deleted.\n".format(num))
 			
-			else:
-				sys.stdout.write("Deleted todo #{}\n".format(num))
-				ls.pop(num-1)
-				with open('todo.txt', 'w') as file1:
-					for item in ls:
-						file1.write(item+"\n")
+		else:
+			sys.stdout.write("Deleted todo #{}\n".format(num))
+			ls.pop(num-1)
+			with open('todo.txt', 'w') as file1:
+				for item in ls:
+					file1.write(item+"\n")
 	else:
 		sys.stdout.write("Error: todo #{} does not exist. Nothing deleted.\n".format(num))
 		
@@ -55,19 +55,19 @@ def todo_done(num):
 	if os.path.isfile('todo.txt'):
 		with open('todo.txt', 'r') as file1:
 			ls=file1.readlines()
-			ls=[i.strip() for i in ls]
+		ls=[i.strip() for i in ls]
 			
-			if num<=0 or num>len(ls):
-				sys.stdout.write("Error: todo #{} does not exist.\n".format(num))
+		if num<=0 or num>len(ls):
+			sys.stdout.write("Error: todo #{} does not exist.\n".format(num))
 			
-			else:
-				done_item= ls.pop(num-1)
-				sys.stdout.write("Marked todo #{} as done.\n".format(num))
-				with open('done.txt', 'a') as file2:
-					file2.write('x '+date.today().strftime('%Y-%m-%d')+' '+done_item + '\n')
-				with open('todo.txt', 'w') as file1:
-					for item in ls:
-						file1.write(item+"\n")
+		else:
+			done_item= ls.pop(num-1)
+			sys.stdout.write("Marked todo #{} as done.\n".format(num))
+			with open('done.txt', 'a') as file2:
+				file2.write('x '+date.today().strftime('%Y-%m-%d')+' '+done_item + '\n')
+			with open('todo.txt', 'w') as file1:
+				for item in ls:
+					file1.write(item+"\n")
 
 def todo_report():
 	with open('done.txt', 'r') as file2:
